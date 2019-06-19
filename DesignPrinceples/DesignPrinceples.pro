@@ -3,5 +3,7 @@ TEMPLATE = subdirs
 SUBDIRS += \
     SOLID \
     DesignPatterns \
-    UnitTests
+    UnitTests \
+    CPP \
+    Qt-Concepts
 
