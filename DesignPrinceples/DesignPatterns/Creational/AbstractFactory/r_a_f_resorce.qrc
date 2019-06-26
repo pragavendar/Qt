@@ -1,2 +1,7 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>Abstract_factory_UML.svg</file>
+        <file>W3sDesign_Abstract_Factory_Design_Pattern_UML.jpg</file>
+        <file>Abstract_factory_Example.svg</file>
+    </qresource>
+</RCC>

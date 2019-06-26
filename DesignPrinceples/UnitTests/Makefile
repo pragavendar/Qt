@@ -28,7 +28,8 @@ COMPRESS      = gzip -9f
 DISTNAME      = UnitTests1.0.0
 DISTDIR = /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/.tmp/UnitTests1.0.0
 SUBTARGETS    =  \
-		sub-SOLID
+		sub-SOLID \
+		sub-DesignPatterns
 
 
 sub-SOLID-qmake_all:  FORCE
@@ -56,6 +57,31 @@ sub-SOLID-install_subtargets: FORCE
 sub-SOLID-uninstall_subtargets: FORCE
 	@test -d SOLID/ || mkdir -p SOLID/
 	cd SOLID/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/SOLID/SOLID.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
+sub-DesignPatterns-qmake_all:  FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile
+	cd DesignPatterns/ && $(MAKE) -f Makefile qmake_all
+sub-DesignPatterns: FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile
+sub-DesignPatterns-make_first: FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile 
+sub-DesignPatterns-all: FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile all
+sub-DesignPatterns-clean: FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile clean
+sub-DesignPatterns-distclean: FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile distclean
+sub-DesignPatterns-install_subtargets: FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile install
+sub-DesignPatterns-uninstall_subtargets: FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile uninstall
 
 Makefile: UnitTests.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -227,20 +253,23 @@ UnitTests.pro:
 qmake: FORCE
 	@$(QMAKE) -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile UnitTests.pro
 
-qmake_all: sub-SOLID-qmake_all FORCE
+qmake_all: sub-SOLID-qmake_all sub-DesignPatterns-qmake_all FORCE
 
-make_first: sub-SOLID-make_first  FORCE
-all: sub-SOLID-all  FORCE
-clean: sub-SOLID-clean  FORCE
-distclean: sub-SOLID-distclean  FORCE
+make_first: sub-SOLID-make_first sub-DesignPatterns-make_first  FORCE
+all: sub-SOLID-all sub-DesignPatterns-all  FORCE
+clean: sub-SOLID-clean sub-DesignPatterns-clean  FORCE
+distclean: sub-SOLID-distclean sub-DesignPatterns-distclean  FORCE
 	-$(DEL_FILE) Makefile
-install_subtargets: sub-SOLID-install_subtargets FORCE
-uninstall_subtargets: sub-SOLID-uninstall_subtargets FORCE
+install_subtargets: sub-SOLID-install_subtargets sub-DesignPatterns-install_subtargets FORCE
+uninstall_subtargets: sub-SOLID-uninstall_subtargets sub-DesignPatterns-uninstall_subtargets FORCE
 
 sub-SOLID-check:
 	@test -d SOLID/ || mkdir -p SOLID/
 	cd SOLID/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/SOLID/SOLID.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
-check: sub-SOLID-check
+sub-DesignPatterns-check:
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -f Makefile check
+check: sub-SOLID-check sub-DesignPatterns-check
 install:install_subtargets  FORCE
 
 uninstall: uninstall_subtargets FORCE
@@ -250,11 +279,15 @@ FORCE:
 dist: distdir FORCE
 	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
 
-distdir: sub-SOLID-distdir FORCE
+distdir: sub-SOLID-distdir sub-DesignPatterns-distdir FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/sanitize.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/gcc-base.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/gcc-base-unix.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/g++-base.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/g++-unix.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/qconfig.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_bootstrap_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_clucene_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_concurrent_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_core.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_core_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_dbus_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designer_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_designercomponents_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_eglfs_device_lib_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_gui_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_help_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimedia.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_multimediawidgets.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_network_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_opengl_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_openglextensions.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_openglextensions_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_platformsupport_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_printsupport_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qml.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qml_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmldevtools_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmltest.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_qmltest_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quick.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quick_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickparticles_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickwidgets.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_quickwidgets_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_script.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_script_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_scripttools.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_scripttools_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_svg.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uiplugin.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_uitools_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_webkit.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_webkitwidgets.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_widgets_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_x11extras.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_xml.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_xml_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_xmlpatterns.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_xmlpatterns_private.pri /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_functions.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/resolve_config.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_post.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qml_debug.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/warn_on.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/testcase_targets.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf UnitTests.pro $(DISTDIR)/
 
 sub-SOLID-distdir: FORCE
 	@test -d SOLID/ || mkdir -p SOLID/
 	cd SOLID/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/SOLID/SOLID.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -e -f Makefile distdir DISTDIR=$(DISTDIR)/SOLID
+
+sub-DesignPatterns-distdir: FORCE
+	@test -d DesignPatterns/ || mkdir -p DesignPatterns/
+	cd DesignPatterns/ && ( test -e Makefile || $(QMAKE) /home/ragav/Documents/Qt/DesignPrinceples/UnitTests/DesignPatterns/DesignPatterns.pro -spec linux-g++-64 CONFIG+=debug CONFIG+=qml_debug -o Makefile ) && $(MAKE) -e -f Makefile distdir DISTDIR=$(DISTDIR)/DesignPatterns
 
