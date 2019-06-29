@@ -5,5 +5,8 @@ SUBDIRS += \
     DesignPatterns \
     UnitTests \
     CPP \
-    Qt-Concepts
+    Qt-Concepts \
+    Algorithms \
+    DataStrutures \
+    C
 
